@@ -11,11 +11,18 @@ import { Album } from './album.model';
       <option value="Soundtrack">Soundtrack</option>
       <option value="Electronica">Electronica</option>
     </select>
-    <div *ngFor="let currentAlbum of childAlbumList | genre:selectedGenre">
-    
-      <album-cart [album]="currentAlbum"></album-cart>
-      <h3> {{ currentAlbum.name }} - {{ currentAlbum.artist }}</h3>
-      <button (click)="editButton(currentAlbum)">Edit</button>
+
+    <div class="row">
+      <div class="col-sm-12" *ngFor="let currentAlbum of childAlbumList | genre:selectedGenre">
+        <hr>
+        <h4> {{ currentAlbum.name }} - {{ currentAlbum.artist }}</h4>
+        <button (click)="inCart(true)">Add to Cart</button>
+        <button (click)="editButton(currentAlbum)">Edit</button>
+      </div>
+      <div class="col-sm-12" *ngFor="let currentAlbum of childAlbumList | incart:selectedCart">
+        <hr>
+        <p>{{ currentAlbum.name }} - {{ currentAlbum.artist }} {{ currentAlbum.price }}</p>
+      </div>
     </div>
   `
 })
@@ -28,6 +35,14 @@ export class AlbumListComponent {
   onChange(optionFromMenu) {
     this.selectedGenre = optionFromMenu;
   }
+
+  public selectedCart: boolean = false;
+  inCart(cartOptionFromMenu) {
+    this.selectedCart = cartOptionFromMenu;
+    console.log(this.selectedCart);
+  }
+
+
 
   editButton(albumToEdit: Album) {
     this.editButtonClickSender.emit(albumToEdit);

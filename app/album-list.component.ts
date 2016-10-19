@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Album } from './album.model';
+import { CartComponent } from './album-cart.component'
 
 @Component({
   selector: 'album-list',
@@ -21,15 +22,13 @@ import { Album } from './album.model';
           <h4> {{ currentAlbum.name }} - {{ currentAlbum.artist }} - {{ currentAlbum.price }} - {{ currentAlbum.genre }}</h4>
           <button (click)="inCart(true)">Add to Cart</button>
           <button (click)="editButton(currentAlbum)">Edit</button>
+          <album-cart [album]="currentAlbum"></album-cart>
         </div>
       </div>
 
       <div class="col-sm-3">
         <h3>Your Cart</h3>
-        <div *ngFor="let currentAlbum of childAlbumList | incart:selectedCart">
-          <hr>
-          <p>{{ currentAlbum.name }} - {{ currentAlbum.artist }} - {{ currentAlbum.price }}</p>
-        </div>
+
       </div>
 
     </div>

@@ -5,11 +5,18 @@ import { Album } from './album.model';
   selector: 'my-app',
   template: `
   <div class ="container">
-    <h1>Record Shop</h1>
+    <h1>Rock and Roll Record Shop</h1>
 
     <album-list
       [childAlbumList]="masterAlbumList"
+      (editButtonClickSender)="showEdit($event)"
     ></album-list>
+
+
+
+    <album-edit
+    [childSelectedAlbum]="selectedAlbum" (doneEditingClickedSender)="finishedEditing()"
+    ></album-edit>
 
     <album-add
       (newAlbumSender)="addAlbum($event)"
@@ -21,9 +28,9 @@ import { Album } from './album.model';
 
 export class AppComponent {
   public masterAlbumList: Album[] = [
-    new Album("Elenore Freidberger", "Personal Record", 9.99, "Rock"),
-    new Album("Nicolas Jaar", "Sirens", 19.99, "House"),
-    new Album("Hamilton Soundtrack", "Hamilton", 24.99, "Soundtrack")
+    new Album("Eleanor Friedberger", "Personal Record", 9.99, "Rock"),
+    new Album("Nicolas Jaar", "Sirens", 19.99, "Electronica"),
+    new Album("Hamilton Cast", "Hamilton Original Broadway Soundtrack", 24.99, "Soundtrack")
   ];
 
   selectedAlbum: Album = null;
@@ -31,4 +38,18 @@ export class AppComponent {
   addAlbum(newAlbumFromChild: Album) {
     this.masterAlbumList.push(newAlbumFromChild);
   }
+
+  showEdit(clickedAlbum: Album) {
+      this.selectedAlbum = clickedAlbum;
+    }
+
+  finishedEditing(){
+      this.selectedAlbum = null;
+    }
+
+  // addToCart() {
+  //   this.selectedAlbum .inCart = true;
+  // }
+
+
 }

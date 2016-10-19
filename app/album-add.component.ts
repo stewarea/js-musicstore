@@ -20,8 +20,12 @@ import { Album } from './album.model';
         <input #newPrice>
       </div>
       <div class="form-group">
-        <label>Genre</label>
-        <input #newGenre>
+        <label #newGenre>Select Genre</label>
+        <select>  
+          <option value="Rock">Rock</option>
+          <option value="Soundtrack">Soundtrack</option>
+          <option value="Electronica">Electronica</option>
+        </select>
       </div>
       <button (click)="addAlbumClicked(newName.value, newArtist.value, newPrice.value, newGenre.value);
       newName.value ='';

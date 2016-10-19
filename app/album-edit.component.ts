@@ -1,33 +1,39 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Album } from './album.model';
 
 @Component ({
   selector: 'album-edit',
   template: `
-  <div *ngIf="editAlbum">
+  <div *ngIf="childSelectedAlbum">
     <hr>
-    <h3>Edit Album</h3>
-    <form>
+    <h3>Edit {{childSelectedAlbum.name}}</h3>
+
       <div class="form-group">
         <label>Edit Name</label>
-        <input [(ngModel)]="editAlbum.name">
+        <input [(ngModel)]="childSelectedAlbum.name">
       </div>
       <div class="form-group">
         <label>Edit Artist</label>
-        <input [(ngModel)]="editAlbum.artist">
+        <input [(ngModel)]="childSelectedAlbum.artist">
       </div>
       <div class="form-group">
         <label>Edit Price</label>
-        <input [(ngModel)]="editAlbum.price">
+        <input [(ngModel)]="childSelectedAlbum.price">
       </div>
       <div class="form-group">
         <label>Edit Genre</label>
-        <input [(ngModel)]="editAlbum.genre">
+        <input [(ngModel)]="childSelectedAlbum.genre">
+        <button (click)="doneEditingClicked()">Done Editing</button>
       </div>
-    </form>
+
+  </div>
   `
 })
 
 export class AlbumEditComponent {
-  @Input() editAlbum: Album;
+  @Input() childSelectedAlbum: Album;
+  @Output() doneEditingClickedSender = new EventEmitter();
+  doneEditingClicked() {
+    this.doneEditingClickedSender.emit();
+  }
 }

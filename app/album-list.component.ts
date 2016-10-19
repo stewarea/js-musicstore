@@ -13,16 +13,25 @@ import { Album } from './album.model';
     </select>
 
     <div class="row">
-      <div class="col-sm-12" *ngFor="let currentAlbum of childAlbumList | genre:selectedGenre">
-        <hr>
-        <h4> {{ currentAlbum.name }} - {{ currentAlbum.artist }}</h4>
-        <button (click)="inCart(true)">Add to Cart</button>
-        <button (click)="editButton(currentAlbum)">Edit</button>
+
+      <div class="col-sm-9">
+      <h3>For Sale</h3>
+        <div *ngFor="let currentAlbum of childAlbumList | genre:selectedGenre">
+          <hr>
+          <h4> {{ currentAlbum.name }} - {{ currentAlbum.artist }} - {{ currentAlbum.price }} - {{ currentAlbum.genre }}</h4>
+          <button (click)="inCart(true)">Add to Cart</button>
+          <button (click)="editButton(currentAlbum)">Edit</button>
+        </div>
       </div>
-      <div class="col-sm-12" *ngFor="let currentAlbum of childAlbumList | incart:selectedCart">
-        <hr>
-        <p>{{ currentAlbum.name }} - {{ currentAlbum.artist }} {{ currentAlbum.price }}</p>
+
+      <div class="col-sm-3">
+        <h3>Your Cart</h3>
+        <div *ngFor="let currentAlbum of childAlbumList | incart:selectedCart">
+          <hr>
+          <p>{{ currentAlbum.name }} - {{ currentAlbum.artist }} - {{ currentAlbum.price }}</p>
+        </div>
       </div>
+
     </div>
   `
 })
